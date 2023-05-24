@@ -54,26 +54,16 @@ testEnvVarsMandatory()
 
 main()
 {
-    mount
-
-    id
-    echo "$HOME"
-
-    pwd
-    ls -lRa /github/
-
-    # testEnvVarsMandatory
+    testEnvVarsMandatory
     testInputArtifactToScan $*
 
-    # we get the input as a parameter
-    echo "i have $1"
+    rm -rf /tmp/report
+    mkdir /tmp/report
 
-    # we produce output via GITHUB_OUTPUT
-    time=$(date)
-    echo "time=$time" >>${GITHUB_OUTPUT}
-
-    echo "status=its all OK folks" >>${GITHUB_OUTPUT}
-    exit 0
+    rl-scan \
+        --package-path=$1 \
+        --report-path=/tmp/report \
+        --report-format=all >>${GITHUB_OUTPUT}
 }
 
 # we pass all args to the function
