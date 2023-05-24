@@ -63,7 +63,10 @@ main()
     rl-scan \
         --package-path=$1 \
         --report-path=/tmp/report \
-        --report-format=all
+        --report-format=all 2>/tmp/2 1>/tmp/1
+    RR=$?
+    grep "Scan result:" /tmp/1 >>${GITHUB_OUTPUT}
+    exit $RR
 }
 
 # we pass all args to the function
