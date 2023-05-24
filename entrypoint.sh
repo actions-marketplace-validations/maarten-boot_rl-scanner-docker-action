@@ -57,12 +57,12 @@ main()
     testEnvVarsMandatory
     testInputArtifactToScan $*
 
-    rm -rf /tmp/report
-    mkdir /tmp/report
+    rm -rf .rl_report
+    mkdir .rl_report
 
     rl-scan \
         --package-path=$1 \
-        --report-path=/tmp/report \
+        --report-path=.rl_report \
         --report-format=all 2>/tmp/2 1>/tmp/1
     RR=$?
     cat /tmp/1
