@@ -62,7 +62,7 @@ main()
 
     echo $*
 
-    ls "${GITHUB_WORKSPACE}"/$1
+    ls -alR "${GITHUB_WORKSPACE}"/*
 
     # testEnvVarsMandatory
     testInputArtifactToScan $*
