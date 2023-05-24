@@ -54,15 +54,13 @@ testEnvVarsMandatory()
 
 main()
 {
-    # mount
+    mount
+
     id
-    pwd
     echo "$HOME"
-    echo "${GITHUB_WORKSPACE}"
 
-    echo $*
-
-    ls -alR "${GITHUB_WORKSPACE}"/*
+    pwd
+    ls
 
     # testEnvVarsMandatory
     testInputArtifactToScan $*
