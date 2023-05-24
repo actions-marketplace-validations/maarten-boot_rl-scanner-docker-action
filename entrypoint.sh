@@ -58,12 +58,14 @@ main()
     id
     pwd
     echo "$HOME"
-    ls
+    echo "${GITHUB_WORKSPACE}"
 
     echo $*
 
+    ls "${GITHUB_WORKSPACE}"/$1
+
     # testEnvVarsMandatory
-    # testInputArtifactToScan $*
+    testInputArtifactToScan $*
 
     # we get the input as a parameter
     echo "i have $1"
@@ -72,7 +74,7 @@ main()
     time=$(date)
     echo "time=$time" >>${GITHUB_OUTPUT}
 
-    echo "status=OK" >>${GITHUB_OUTPUT}
+    echo "status=its all OK folks" >>${GITHUB_OUTPUT}
     exit 0
 }
 
