@@ -4,6 +4,13 @@ This action runs a scan with reversinglabs/rl-scanner on a single provided artif
 This action expects the artifact to be produced in the current github repo.
 Its path relative to the root of the github repo is specified as input to the action.
 
+## Environment
+The reversinglabs/rl-scanner will require the licence data to be passed via the environment with the pre set names:
+* RLSECURE_SITE_KEY
+* RLSECURE_ENCODED_LICENSE
+
+The most secure way is to define secrets on the organisational or repository level.
+
 ## Inputs
 
 ## `my-artifact-to-scan`
