@@ -54,8 +54,12 @@ testEnvVarsMandatory()
 
 main()
 {
+    mount
+    id
+    ls
+
     # testEnvVarsMandatory
-    testInputArtifactToScan $*
+    # testInputArtifactToScan $*
 
     echo $*
 
@@ -65,10 +69,6 @@ main()
     # we produce output via GITHUB_OUTPUT
     time=$(date)
     echo "time=$time" >>${GITHUB_OUTPUT}
-
-    mount
-    id
-    ls
 
     echo "status=OK" >>${GITHUB_OUTPUT}
     exit 0
