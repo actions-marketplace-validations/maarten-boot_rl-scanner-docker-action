@@ -66,7 +66,13 @@ main()
         --report-format=all 2>/tmp/2 1>/tmp/1
     RR=$?
     cat /tmp/1
-    grep "Scan result:" /tmp/1 >>${GITHUB_OUTPUT}
+
+    # EOF delim should be random
+    EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+    echo "status<<$EOF"         >>${GITHUB_OUTPUT}
+    grep "Scan result:" /tmp/1  >>${GITHUB_OUTPUT}
+    echo "$EOF"                 >>${GITHUB_OUTPUT}
+
     exit $RR
 }
 
