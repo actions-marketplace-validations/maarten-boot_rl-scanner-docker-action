@@ -60,7 +60,7 @@ main()
     echo "$HOME"
 
     pwd
-    ls
+    ls -lRa /github/
 
     # testEnvVarsMandatory
     testInputArtifactToScan $*
