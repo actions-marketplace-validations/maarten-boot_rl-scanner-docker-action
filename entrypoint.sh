@@ -63,7 +63,7 @@ main()
     rl-scan \
         --package-path=$1 \
         --report-path=/tmp/report \
-        --report-format=all >>${GITHUB_OUTPUT}
+        --report-format=all
 }
 
 # we pass all args to the function
