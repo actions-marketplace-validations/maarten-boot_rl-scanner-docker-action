@@ -9,13 +9,11 @@ This action runs a scan with reversinglabs/rl-scanner on a single provided artif
 **Required** The name of the person to greet.
 
 ## Outputs
-
-## `time`
-
-The time we greeted you.
+* `time` The time we greeted you.
+* `status` The time we greeted you.
 
 ## Example usage
 
--uses: actions/rl-scanner-docker-action@v1
-with:
-  who-to-greet: 'Mona the Octocat'
+    -uses: actions/rl-scanner-docker-action@v3
+    with:
+      my-artifact-to-scan: 'README.md'

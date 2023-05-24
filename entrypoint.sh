@@ -54,16 +54,16 @@ testEnvVarsMandatory()
 
 main()
 {
-    mount
-
+    # mount
     id
     pwd
-    ls -l
-
-    # testEnvVarsMandatory
-    testInputArtifactToScan $*
+    echo "$HOME"
+    ls
 
     echo $*
+
+    # testEnvVarsMandatory
+    # testInputArtifactToScan $*
 
     # we get the input as a parameter
     echo "i have $1"
