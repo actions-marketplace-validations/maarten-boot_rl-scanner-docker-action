@@ -55,11 +55,13 @@ testEnvVarsMandatory()
 main()
 {
     mount
+
     id
-    ls
+    pwd
+    ls -l
 
     # testEnvVarsMandatory
-    # testInputArtifactToScan $*
+    testInputArtifactToScan $*
 
     echo $*
 
