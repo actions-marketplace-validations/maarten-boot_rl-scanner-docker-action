@@ -26,8 +26,40 @@ anything that is in .rl_report will be deletedd during the scan
 
 ## Example usage
 
-    -uses: actions/rl-scanner-docker-action@v<some version tag>
-    with:
-      my-artifact-to-scan: 'README.md'
+### Scan
+    # run the action
+    - name: run the reversinglabs/rl-scanner
+      id: scan
+      env: # Or as an environment variable
+        RLSECURE_ENCODED_LICENSE: ${{ secrets.RLSECURE_ENCODED_LICENSE }}
+        RLSECURE_SITE_KEY: ${{ secrets.RLSECURE_SITE_KEY }}
+      uses: maarten-boot/rl-scanner-docker-action@v3.10
+      with:
+        my-artifact-to-scan: 'README.md'
 
 Will scan the README.md and produce a report in ./.rl_report/report that can be picked up from the repository 
+
+### Status
+You can pickup the status of the scan with:
+As we always produce a status even when the scan step detects a error (and fails),
+you should place a explicit if condition as shown so that the status always gets extracted on PASS and FAIL of the scan.
+
+    # -------------------------------------
+    # Use the output from the scan step
+    - name: Get the scan status output
+      if: success() || failure()
+      run: |
+        echo "The status is: '${{ steps.scan.outputs.status }}'"
+
+### Report
+The report can be extracted as artifact with the upload-artifact action step.
+As we always produce a report even when the scan step detects a error (and fails),
+you should place a explicit if condition as shown so that the report always gets uploaded on PASS and FAIL of the scan.
+
+    # -------------------------------------
+    - name: Archive Report
+      if: success() || failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: report
+        path: .rl_report
