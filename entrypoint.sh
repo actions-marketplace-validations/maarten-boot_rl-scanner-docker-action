@@ -15,23 +15,27 @@
 
 EXIT_FATAL=101
 
+fatal()
+{
+    local msg="$1"
+    echo "status=FATAL: ${msg}" >>${GITHUB_OUTPUT}
+    exit ${EXIT_FATAL}
+}
+
 testInputArtifactToScan()
 {
     local item="$1"
 
     [ ! -f "$item" ] && {
-        echo "status=FATAL: no such file: '$item'" >>${GITHUB_OUTPUT}
-        exit ${EXIT_FATAL}
+        fatal "file not found: '$item'"
     }
 
     [ ! -r "$item" ] && {
-        echo "status=FATAL: file is not readable: '$item'" >>${GITHUB_OUTPUT}
-        exit ${EXIT_FATAL}
+        fatal "file not readable: '$item'"
     }
 
     [ ! -s "$item" ] && {
-        echo "status=FATAL: file has zero length: '$item'" >>${GITHUB_OUTPUT}
-        exit ${EXIT_FATAL}
+        fatal "file has zero length: '$item'"
     }
 
     INPUT_FILE_TO_SCAN="${item}"
@@ -40,13 +44,11 @@ testInputArtifactToScan()
 testEnvVarsMandatory()
 {
     [ -z "${RLSECURE_ENCODED_LICENSE}" ] && {
-        echo "status=FATAL: no value for environment variable: 'RLSECURE_ENCODED_LICENSE'" >>${GITHUB_OUTPUT}
-        exit ${EXIT_FATAL}
+        fatal "no value provided for mandatory environment variable: 'RLSECURE_ENCODED_LICENSE'"
     }
 
     [ -z "${RLSECURE_SITE_KEY}" ] && {
-        echo "status=FATAL: no value for environment variable: 'RLSECURE_SITE_KEY'" >>${GITHUB_OUTPUT}
-        exit ${EXIT_FATAL}
+        echo "no value provided for mandatory environment variable: 'RLSECURE_SITE_KEY'"
     }
 }
 
@@ -55,8 +57,10 @@ main()
     # testEnvVarsMandatory
     testInputArtifactToScan $*
 
+    echo $*
+
     # we get the input as a parameter
-    echo "Hello $1"
+    echo "i have $1"
 
     # we produce output via GITHUB_OUTPUT
     time=$(date)
@@ -65,6 +69,9 @@ main()
     mount
     id
     ls
+
+    echo "status=OK" >>${GITHUB_OUTPUT}
+    exit 0
 }
 
 # we pass all args to the function

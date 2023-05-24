@@ -1,0 +1,20 @@
+# action.yml
+name: 'rl-scanner-action'
+description: 'scan a artifact and provide a status'
+
+inputs:
+  my-artifact-to-scan:  # id of input
+    description: 'what  artifact will we scan (file path)'
+    required: true
+
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+  status: #
+    description: 'The result status of the action'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.my-artifact-to-scan }}
