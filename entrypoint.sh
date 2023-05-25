@@ -73,6 +73,10 @@ main()
     grep "Scan result:" /tmp/1  >>${GITHUB_OUTPUT}
     echo "$EOF"                 >>${GITHUB_OUTPUT}
 
+    echo "status<<$EOF"         >>${GITHUB_STEP_SUMMARY}
+    grep "Scan result:" /tmp/1  >>${GITHUB_STEP_SUMMARY}
+    echo "$EOF"                 >>${GITHUB_STEP_SUMMARY}
+
     exit $RR
 }
 
