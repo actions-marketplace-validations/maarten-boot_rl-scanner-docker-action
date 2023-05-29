@@ -1,6 +1,9 @@
 # action.yml
 name: 'rl-scanner-action'
 description: 'scan a artifact and provide a status'
+branding:
+  icon: 'check'
+  color: 'green'
 
 inputs:
   my-artifact-to-scan:  # id of input
